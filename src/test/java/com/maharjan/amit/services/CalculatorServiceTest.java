@@ -1,41 +1,44 @@
 package com.maharjan.amit.services;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 public class CalculatorServiceTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         System.out.println("Running CalculatorServiceTest");
     }
 
-    @AfterClass
+    @AfterAll
     public static void end() {
         System.out.println("Ending CalculatorServiceTest");
     }
 
-    @Before
+    @BeforeEach
     public void beforeEachTestCase() {
         System.out.println("Before Each TestCase");
     }
 
-    @After
+    @AfterEach
     public void afterEachTestCase() {
         System.out.println("After Each TestCase");
     }
 
     @Test
+    @Disabled
     public void addTwoNumberTest() {
         System.out.println("Running CalculatorServiceTest.addTwoNumberTest");
         int result = CalculatorService.add(2,3);
-        Assert.assertEquals(5, result);
+        Assertions.assertEquals(5, result);
     }
 
-    @Test(timeout = 5000) // 5000 ms
+    @Test
+    @Timeout(5) // 5 sec
+    @DisplayName("This test case add all the number with no limit in the count")
     public void addAnyNumberTest() throws InterruptedException {
         System.out.println("Running CalculatorServiceTest.addAnyNumberTest");
 //        Thread.sleep(6000);
         int result = CalculatorService.add(1,2,3,4,5);
-        Assert.assertEquals(15, result);
+        Assertions.assertEquals(15, result, "Test failed!");
     }
 }
